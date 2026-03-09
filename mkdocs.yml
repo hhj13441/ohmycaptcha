@@ -1,0 +1,101 @@
+site_name: OhMyCaptcha
+site_description: Self-hostable YesCaptcha-compatible captcha solver built with FastAPI, Playwright, and OpenAI-compatible multimodal models.
+site_url: https://shenhao-stu.github.io/ohmycaptcha/
+repo_url: https://github.com/shenhao-stu/ohmycaptcha
+repo_name: shenhao-stu/ohmycaptcha
+edit_uri: edit/main/docs/
+
+extra:
+  alternate:
+    - name: English
+      link: /
+      lang: en
+    - name: 简体中文
+      link: /zh/
+      lang: zh
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/shenhao-stu/ohmycaptcha
+
+extra_css:
+  - stylesheets/extra.css
+
+theme:
+  name: material
+  language: en
+  icon:
+    repo: fontawesome/brands/github
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: indigo
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: indigo
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - toc.follow
+    - content.code.copy
+    - content.action.edit
+    - search.suggest
+    - search.highlight
+
+plugins:
+  - search
+  - redirects:
+      redirect_maps:
+        zh/index.md: index.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.details
+  - pymdownx.tabbed:
+      alternate_style: true
+
+nav:
+  - Home: index.md
+  - Getting Started: getting-started.md
+  - API Reference: api-reference.md
+  - Usage:
+      - reCAPTCHA v3: usage/recaptcha-v3.md
+      - Image CAPTCHA: usage/image-captcha.md
+  - Positioning: positioning.md
+  - Deployment:
+      - Render: deployment/render.md
+      - Hugging Face Spaces: deployment/huggingface.md
+  - Agent Skill: skill.md
+  - Acceptance: acceptance.md
+  - FAQ: faq.md
+  - 中文文档:
+      - 首页: zh/index.md
+      - 快速开始: zh/getting-started.md
+      - API 参考: zh/api-reference.md
+      - 使用指南:
+          - reCAPTCHA v3: zh/usage/recaptcha-v3.md
+          - 图片验证码: zh/usage/image-captcha.md
+      - 项目定位: zh/positioning.md
+      - 部署:
+          - Render: zh/deployment/render.md
+          - Hugging Face Spaces: zh/deployment/huggingface.md
+      - Agent Skill: zh/skill.md
+      - 验收: zh/acceptance.md
+      - 常见问题: zh/faq.md
