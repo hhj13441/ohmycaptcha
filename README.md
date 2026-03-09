@@ -12,7 +12,7 @@
 <h1 align="center">🧩 OhMyCaptcha</h1>
 
 <p align="center">
-  <strong>Self-hostable YesCaptcha-style captcha solver for <a href="https://github.com/OpenClaw/openclaw">flow2api</a> and similar integrations</strong>
+  <strong>Self-hostable YesCaptcha-style captcha solver for <a href="https://github.com/TheSmallHanCat/flow2api">flow2api</a> and similar integrations</strong>
   <br/>
   <em>19 task types · reCAPTCHA v2/v3 · hCaptcha · Cloudflare Turnstile · Image Classification</em>
 </p>
