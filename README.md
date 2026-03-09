@@ -1,56 +1,115 @@
-<div align="center">
-
-# OhMyCaptcha
-
-**Self-hostable YesCaptcha-style captcha solver for flow2api and similar integrations**
-
-<p>
-  <a href="https://github.com/shenhao-stu/ohmycaptcha"><img alt="GitHub Repo" src="https://img.shields.io/badge/GitHub-ohmycaptcha-181717?logo=github"></a>
-  <a href="https://shenhao-stu.github.io/ohmycaptcha/"><img alt="Docs" src="https://img.shields.io/badge/docs-MkDocs%20Material-526CFE?logo=materialformkdocs&logoColor=white"></a>
-  <img alt="Python" src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&logoColor=white">
-  <img alt="FastAPI" src="https://img.shields.io/badge/FastAPI-0.119-009688?logo=fastapi&logoColor=white">
-  <img alt="Playwright" src="https://img.shields.io/badge/Playwright-Chromium-2EAD33?logo=playwright&logoColor=white">
-  <img alt="OpenAI Compatible" src="https://img.shields.io/badge/OpenAI--compatible-Multimodal-6E56CF">
-  <img alt="Render" src="https://img.shields.io/badge/Deploy-Render-000000?logo=render&logoColor=white">
-  <img alt="Hugging Face Spaces" src="https://img.shields.io/badge/Deploy-Hugging%20Face%20Spaces-FFB000?logo=huggingface&logoColor=black">
-  <img alt="License" src="https://img.shields.io/badge/License-MIT-111111">
+<p align="center">
+  <img src="https://img.shields.io/badge/OhMyCaptcha-YesCaptcha--style%20API-2F6BFF?style=for-the-badge" alt="OhMyCaptcha">
+  <br/>
+  <img src="https://img.shields.io/badge/version-public%20repo-22C55E?style=flat-square" alt="Version">
+  <img src="https://img.shields.io/badge/license-MIT-2563EB?style=flat-square" alt="License">
+  <img src="https://img.shields.io/badge/task%20types-5-F59E0B?style=flat-square" alt="Task Types">
+  <img src="https://img.shields.io/badge/runtime-FastAPI%20%7C%20Playwright%20%7C%20OpenAI--compatible-7C3AED?style=flat-square" alt="Runtime">
+  <img src="https://img.shields.io/badge/deploy-Render%20%7C%20Hugging%20Face%20Spaces-0F172A?style=flat-square" alt="Deploy">
+  <img src="https://img.shields.io/badge/docs-bilingual-2563EB?style=flat-square" alt="Docs">
 </p>
 
-[中文说明](README.zh-CN.md) · [Documentation](https://shenhao-stu.github.io/ohmycaptcha/) · [Render Guide](https://shenhao-stu.github.io/ohmycaptcha/deployment/render/) · [Hugging Face Guide](https://shenhao-stu.github.io/ohmycaptcha/deployment/huggingface/) · [Skills](skills/README.md)
+<h1 align="center">🧩 OhMyCaptcha</h1>
+
+<p align="center">
+  <strong>Self-hostable YesCaptcha-style captcha solver for <a href="https://github.com/OpenClaw/openclaw">flow2api</a> and similar integrations</strong>
+  <br/>
+  <em>Ship a browser-based reCAPTCHA v3 and multimodal image captcha service with a familiar async task API.</em>
+</p>
+
+<p align="center">
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-task-types">Task Types</a> •
+  <a href="#-deployment">Deployment</a> •
+  <a href="#-skills">Skills</a> •
+  <a href="#-development">Development</a>
+</p>
+
+<p align="center">
+  <a href="README.zh-CN.md">中文说明</a> •
+  <a href="https://shenhao-stu.github.io/ohmycaptcha/">Documentation</a> •
+  <a href="https://shenhao-stu.github.io/ohmycaptcha/deployment/render/">Render Guide</a> •
+  <a href="https://shenhao-stu.github.io/ohmycaptcha/deployment/huggingface/">Hugging Face Guide</a> •
+  <a href="skills/README.md">Skills</a>
+</p>
 
 ![OhMyCaptcha hero](docs/assets/ohmycaptcha-hero.png)
 
-</div>
+---
 
-OhMyCaptcha is a polished, self-hostable captcha-solving service that exposes a **YesCaptcha-style async API** for the task types implemented in this repository. It is built for **flow2api**, internal routing layers, and other systems that expect `createTask` / `getTaskResult` semantics.
+## ✨ What Is This?
+
+**OhMyCaptcha** is a ready-to-deploy self-hosted captcha-solving service that exposes a **YesCaptcha-style async API** for the task types implemented in this repository. It is designed for **flow2api**, internal routing layers, and other systems that expect `createTask` / `getTaskResult` semantics.
+
+### What You Get
+
+- ⚡ **YesCaptcha-style async API** with `createTask`, `getTaskResult`, `getBalance`, and health endpoints
+- 🌐 **Browser-based reCAPTCHA v3 solving** through Playwright + Chromium
+- 🧠 **OpenAI-compatible multimodal reasoning** for image captcha analysis
+- 🏠 **Self-hostable deployment paths** for local use, Render, and Hugging Face Spaces
+- 📚 **Bilingual documentation** published through GitHub Pages
+- 🧩 **Reusable local skills** for Claude Code, OpenCode, and similar agent workflows
+- 🛡️ **Clear capability boundaries** without overstating vendor parity or score guarantees
+
+> OhMyCaptcha is best described as a **self-hostable YesCaptcha-compatible service for the task types implemented here**. It does **not** claim full feature parity with every commercial captcha-solving platform.
 
 ---
 
-## Highlights
+## 📦 Quick Start
 
-- **YesCaptcha-style async API** for supported task types
-- **Playwright + Chromium** solving path for reCAPTCHA v3 token generation
-- **OpenAI-compatible multimodal backends** for image captcha analysis
-- **Self-hosted friendly deployment** for local environments, Render, and Hugging Face Spaces
-- **Bilingual docs** with GitHub Pages publishing
-- **Reusable agent skills** for Claude Code, OpenCode, and similar workflows
+### For Humans
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+playwright install --with-deps chromium
+
+export CLIENT_KEY="your-client-key"
+export CAPTCHA_BASE_URL="https://your-openai-compatible-endpoint/v1"
+export CAPTCHA_API_KEY="your-api-key"
+export CAPTCHA_MODEL="gpt-5.4"
+export CAPTCHA_MULTIMODAL_MODEL="qwen3.5-2b"
+export BROWSER_HEADLESS="true"
+export BROWSER_TIMEOUT="30"
+
+python main.py
+```
+
+### Verify Health
+
+```bash
+curl http://localhost:8000/
+curl http://localhost:8000/api/v1/health
+```
+
+### For LLM Agents
+
+Paste this into your agent environment:
+
+```text
+Install and validate OhMyCaptcha from this repository. Follow the local setup, configure placeholder environment variables, start the service, verify the health endpoints, and show me how to create a reCAPTCHA v3 task and an ImageToTextTask.
+```
 
 ---
 
-## Why OhMyCaptcha
+## 🏗 Architecture
 
-Managed captcha-solving platforms are convenient, but self-hosted workflows often need more control:
+<p align="center">
+  <img src="docs/assets/ohmycaptcha-diagram.png" alt="OhMyCaptcha architecture diagram" width="100%">
+</p>
 
-- **Deployment ownership** — run the service in your own environment
-- **Model routing flexibility** — connect hosted or self-hosted OpenAI-compatible multimodal backends
-- **Transparent solving flow** — understand the browser path instead of hiding it behind a black box
-- **Integration compatibility** — keep a familiar YesCaptcha-style API surface for existing clients
+### Core Building Blocks
 
-> OhMyCaptcha is best described as a **self-hostable YesCaptcha-compatible service for the task types implemented here**. It does **not** claim full parity with every commercial captcha-solving platform.
+- **FastAPI** powers the HTTP API
+- **Playwright + Chromium** generate reCAPTCHA v3 tokens
+- **OpenAI-compatible multimodal APIs** analyze image captchas
+- **An in-memory async task manager** handles background execution
 
 ---
 
-## Supported task types
+## 🧠 Task Types
 
 ### reCAPTCHA v3
 
@@ -69,81 +128,14 @@ All four task types currently use the same browser-based solving path in this co
 
 ---
 
-## Architecture
+## 🔌 API Surface
 
-```text
-Client / flow2api
-        │
-        ▼
-  POST /createTask
-        │
-        ▼
- In-memory TaskManager
-        │
-   ┌────┴────┐
-   ▼         ▼
-Playwright   OpenAI-compatible
-reCAPTCHA    multimodal model
-solver       backend
-   │         │
-   └────┬────┘
-        ▼
- POST /getTaskResult
-```
-
-### Core building blocks
-
-- **FastAPI** powers the HTTP API
-- **Playwright + Chromium** generate reCAPTCHA v3 tokens
-- **OpenAI-compatible multimodal APIs** analyze image captchas
-- **An in-memory async task manager** handles background execution
-
----
-
-## Quick start
-
-### 1. Install dependencies
-
-```bash
-python -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-playwright install --with-deps chromium
-```
-
-### 2. Configure environment variables
-
-```bash
-export CLIENT_KEY="your-client-key"
-export CAPTCHA_BASE_URL="https://your-openai-compatible-endpoint/v1"
-export CAPTCHA_API_KEY="your-api-key"
-export CAPTCHA_MODEL="gpt-5.4"
-export CAPTCHA_MULTIMODAL_MODEL="qwen3.5-2b"
-export BROWSER_HEADLESS="true"
-export BROWSER_TIMEOUT="30"
-```
-
-### 3. Start the service
-
-```bash
-python main.py
-```
-
-### 4. Verify health
-
-```bash
-curl http://localhost:8000/
-curl http://localhost:8000/api/v1/health
-```
-
----
-
-## API surface
-
-- `POST /createTask`
-- `POST /getTaskResult`
-- `POST /getBalance`
-- `GET /api/v1/health`
+| Endpoint | Purpose |
+|----------|---------|
+| `POST /createTask` | Create an async captcha task |
+| `POST /getTaskResult` | Poll task execution result |
+| `POST /getBalance` | Return compatibility balance payload |
+| `GET /api/v1/health` | Health and service status |
 
 ### Create a reCAPTCHA v3 task
 
@@ -188,10 +180,10 @@ curl -X POST http://localhost:8000/createTask \
 
 ---
 
-## Configuration
+## ⚙️ Configuration
 
 | Variable | Description | Default |
-| --- | --- | --- |
+|----------|-------------|---------|
 | `CLIENT_KEY` | Client authentication key used as `clientKey` | unset |
 | `CAPTCHA_BASE_URL` | OpenAI-compatible API base URL | `https://your-openai-compatible-endpoint/v1` |
 | `CAPTCHA_API_KEY` | API key for the configured model backend | unset |
@@ -206,7 +198,7 @@ curl -X POST http://localhost:8000/createTask \
 
 ---
 
-## Deployment
+## 🚀 Deployment
 
 - [Render deployment](https://shenhao-stu.github.io/ohmycaptcha/deployment/render/)
 - [Hugging Face Spaces deployment](https://shenhao-stu.github.io/ohmycaptcha/deployment/huggingface/)
@@ -214,7 +206,7 @@ curl -X POST http://localhost:8000/createTask \
 
 ---
 
-## Skills
+## 🧩 Skills
 
 This repository includes reusable local skills under `skills/`:
 
@@ -225,7 +217,7 @@ They are designed for Claude Code, OpenCode, OpenClaw-style workflows, and simil
 
 ---
 
-## Acceptance status
+## ✅ Acceptance Status
 
 This repository has been validated locally against the public reCAPTCHA v3 detector target at:
 
@@ -243,7 +235,7 @@ The implementation does **not** claim guaranteed score targeting or full compati
 
 ---
 
-## Limitations
+## ⚠️ Limitations
 
 - Tasks are stored **in memory** and expire after the configured TTL
 - `minScore` exists in the schema for compatibility, but the current solver does **not** enforce score targeting
@@ -252,7 +244,7 @@ The implementation does **not** claim guaranteed score targeting or full compati
 
 ---
 
-## Development
+## 🔧 Development
 
 ```bash
 pytest tests/
@@ -266,6 +258,8 @@ python -m mkdocs build --strict
 
 [![Star History Chart](https://api.star-history.com/svg?repos=shenhao-stu/ohmycaptcha&type=Date)](https://www.star-history.com/#shenhao-stu/ohmycaptcha&Date)
 
-## License
+---
 
-This repository is released under the [MIT License](LICENSE).
+## 📄 License
+
+[MIT](LICENSE) — use freely, modify openly, deploy carefully.
